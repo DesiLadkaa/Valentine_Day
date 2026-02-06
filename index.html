@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will you be my Valentine? 💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e91e63 0%, #ff4d94 50%, #ff1e6b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Floating hearts in background */
+        .floating-bg-heart {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.3;
+            animation: floatBgHeart 8s infinite ease-in-out;
+        }
+
+        @keyframes floatBgHeart {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        .container {
+            text-align: center;
+            background: linear-gradient(135deg, #ff85b3 0%, #ff6ba8 100%);
+            padding: 50px 60px 60px;
+            border-radius: 35px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+        }
+
+        /* Profile image circle */
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            overflow: hidden;
+            border: 5px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Heading */
+        .heading {
+            font-size: 36px;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Romantic message paragraph */
+        .romantic-intro {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: white;
+            margin-bottom: 35px;
+            font-weight: bold;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        button {
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff1e6b 0%, #e91e63 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.5);
+            padding: 18px 50px;
+            font-size: 20px;
+        }
+
+        .yes-btn:hover {
+            background: linear-gradient(135deg, #d81b60 0%, #c2185b 100%);
+            transform: scale(1.05);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #6d6d6d 0%, #5a5a5a 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 18px 50px;
+            font-size: 20px;
+            position: relative;
+        }
+
+        .no-btn:hover {
+            background: linear-gradient(135deg, #5a5a5a 0%, #4a4a4a 100%);
+        }
+
+        .romantic-message {
+            font-size: 18px;
+            color: white;
+            margin-top: 25px;
+            font-weight: 600;
+            min-height: 30px;
+            animation: fadeInMsg 0.5s ease;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInMsg {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 50%, #ff6b9d 100%);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .celebration.show {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .celebration h2 {
+            font-size: 60px;
+            color: white;
+            margin-bottom: 20px;
+            animation: bounceIn 1s ease;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .celebration p {
+            font-size: 28px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease 0.5s both;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.8;
+            animation: floatHeart 6s ease-in-out infinite;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background floating hearts -->
+    <div class="floating-bg-heart" style="top: 15%; left: 10%; animation-delay: 0s;">❤️</div>
+    <div class="floating-bg-heart" style="bottom: 20%; left: 15%; animation-delay: 2s;">💕</div>
+    <div class="floating-bg-heart" style="top: 60%; right: 12%; animation-delay: 4s;">💖</div>
+    <div class="floating-bg-heart" style="bottom: 50%; right: 8%; animation-delay: 6s;">❤️</div>
+
+    <div class="sparkle" style="top: 20%; left: 10%;"></div>
+    <div class="sparkle" style="top: 80%; left: 20%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="top: 30%; right: 15%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="bottom: 20%; right: 30%; animation-delay: 1.5s;"></div>
+
+    <div class="container">
+        <!-- Profile Image from image folder -->
+        <div class="profile-image">
+            <img src="image/profile.jpg" alt="My Love" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ff85b3%22/%3E%3Ctext x=%2250%22 y=%2255%22 font-size=%2230%22 text-anchor=%22middle%22 fill=%22white%22%3E💕%3C/text%3E%3C/svg%3E'">
+        </div>
+
+        <div class="heading">Hey My Love 💕</div>
+        
+        <p class="romantic-intro">
+            Every smile of yours feels like home. Every moment with you feels like magic. And today... I just have one important question.
+        </p>
+
+        <h1>Will you be my Valentine? 💕</h1>
+        
+        <div class="buttons">
+            <button class="yes-btn" onclick="handleYes()">Yes 💕</button>
+            <button class="no-btn" onclick="handleNo(this)">No 💔</button>
+        </div>
+        <div class="romantic-message" id="romanticMessage"></div>
+        <p class="footer-text">*No* option is 100% lies 😉</p>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <h2>I Love You! 💕</h2>
+        <p>You make my heart complete ❤️</p>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+
+        function handleYes() {
+            const celebration = document.getElementById('celebration');
+            celebration.classList.add('show');
+            
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => createFloatingHeart(), i * 200);
+            }
+            
+            setInterval(() => {
+                createFloatingHeart();
+            }, 300);
+            
+            const messages = [
+                'You make my heart complete ❤️',
+                'Forever and always 💕',
+                'You are my everything 💖',
+                'Together forever, my love 💝'
+            ];
+            
+            let messageIndex = 0;
+            setInterval(() => {
+                messageIndex = (messageIndex + 1) % messages.length;
+                celebration.querySelector('p').textContent = messages[messageIndex];
+            }, 3000);
+        }
+
+        function handleNo(button) {
+            noClickCount++;
+            
+            const randomX = Math.random() * 60 - 30;
+            const randomY = Math.random() * 40 - 20;
+            
+            button.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            
+            const romanticMessages = [
+                "You are my sunshine on a cloudy day ☀️",
+                "Every moment with you is precious 💎",
+                "You make my heart skip a beat 💓",
+                "I can't imagine my life without you 🌹",
+                "You are the reason I smile every day 😊",
+                "My love for you grows stronger each day 🌺",
+                "You complete me in every way 💕",
+                "Being with you feels like home 🏡",
+                "You are my forever and always 💖",
+                "I fall in love with you more each day 💗",
+                "You are my dream come true ✨",
+                "Together we are unstoppable 💪❤️",
+                "You light up my world 🌟",
+                "My heart belongs only to you 💝",
+                "You are my greatest adventure 🗺️❤️"
+            ];
+            
+            const randomMessage = romanticMessages[Math.floor(Math.random() * romanticMessages.length)];
+            const messageElement = document.getElementById('romanticMessage');
+            messageElement.textContent = randomMessage;
+            
+            const messages = [
+                "Are you sure? 🥺",
+                "Really? Think again! 💭",
+                "The Yes button is looking pretty good... 👀",
+                "Come on, you know you want to! 😊",
+                "I'm not giving up! 💪",
+                "Pretty please? 🙏"
+            ];
+            
+            if (noClickCount <= messages.length) {
+                const footerText = document.querySelector('.footer-text');
+                footerText.textContent = messages[noClickCount - 1] || messages[messages.length - 1];
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = ['#ff6b9d', '#ffc371', '#c471ed', '#12c2e9'][Math.floor(Math.random() * 4)];
+            confetti.style.animationDelay = Math.random() * 3 + 's';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 5000);
+        }
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = ['❤️', '💕', '💖', '💗', '💝', '💞'][Math.floor(Math.random() * 6)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 30 + 30) + 'px';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('celebration').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        setInterval(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.left = Math.random() * 100 + '%';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2000);
+        }, 500);
+    </script>
+</body>
+</html>

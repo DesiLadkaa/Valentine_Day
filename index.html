@@ -13,13 +13,14 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #e91e63 0%, #ff4d94 50%, #ff1e6b 100%);
+            background: linear-gradient(135deg, #d81b60 0%, #ff1e6b 50%, #e91e63 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
             position: relative;
+            padding: 20px;
         }
 
         .sparkle {
@@ -52,13 +53,22 @@
 
         .container {
             text-align: center;
-            background: linear-gradient(135deg, #ff85b3 0%, #ff6ba8 100%);
-            padding: 50px 60px 60px;
+            background: linear-gradient(135deg, #ff6ba8 0%, #ff85b8 100%);
+            padding: 40px 35px 50px;
             border-radius: 35px;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
             max-width: 500px;
+            width: 100%;
+        }
+
+        /* Profile image wrapper with orbiting hearts */
+        .profile-wrapper {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 25px;
         }
 
         /* Profile image circle */
@@ -66,11 +76,14 @@
             width: 140px;
             height: 140px;
             border-radius: 50%;
-            margin: 0 auto 25px;
             overflow: hidden;
             border: 5px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             animation: float 3s ease-in-out infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .profile-image img {
@@ -80,39 +93,73 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+            50% { transform: translate(-50%, -50%) translateY(-10px); }
+        }
+
+        /* Orbiting hearts around profile image */
+        .orbit-heart {
+            position: absolute;
+            font-size: 24px;
+            animation: orbit 4s linear infinite;
+            top: 50%;
+            left: 50%;
+        }
+
+        .orbit-heart:nth-child(2) {
+            animation-delay: 0s;
+        }
+
+        .orbit-heart:nth-child(3) {
+            animation-delay: -1s;
+        }
+
+        .orbit-heart:nth-child(4) {
+            animation-delay: -2s;
+        }
+
+        .orbit-heart:nth-child(5) {
+            animation-delay: -3s;
+        }
+
+        @keyframes orbit {
+            0% { 
+                transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg); 
+            }
+            100% { 
+                transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg); 
+            }
         }
 
         /* Heading */
         .heading {
-            font-size: 36px;
+            font-size: 32px;
             color: white;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-weight: bold;
             text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         /* Romantic message paragraph */
         .romantic-intro {
-            font-size: 16px;
+            font-size: 15px;
             color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 25px;
-            line-height: 1.6;
+            margin-bottom: 20px;
+            line-height: 1.5;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 24px;
             color: white;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             font-weight: bold;
             text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         .buttons {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             margin-bottom: 20px;
             position: relative;
@@ -129,30 +176,124 @@
             font-family: 'Arial', sans-serif;
         }
 
+        /* Smaller button sizes */
         .yes-btn {
             background: linear-gradient(135deg, #ff1e6b 0%, #e91e63 100%);
             color: white;
-            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.5);
-            padding: 18px 50px;
-            font-size: 20px;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+            padding: 14px 45px;
+            font-size: 18px;
         }
 
         .yes-btn:hover {
-            background: linear-gradient(135deg, #d81b60 0%, #c2185b 100%);
+            background: linear-gradient(135deg, #c2185b 0%, #ad1457 100%);
             transform: scale(1.05);
         }
 
+        /* Smaller button sizes */
         .no-btn {
             background: linear-gradient(135deg, #6d6d6d 0%, #5a5a5a 100%);
             color: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            padding: 18px 50px;
-            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 14px 45px;
+            font-size: 18px;
             position: relative;
         }
 
         .no-btn:hover {
             background: linear-gradient(135deg, #5a5a5a 0%, #4a4a4a 100%);
+        }
+
+        .romantic-message {
+            font-size: 18px;
+            color: white;
+            margin-top: 25px;
+            font-weight: 600;
+            min-height: 30px;
+            animation: fadeInMsg 0.5s ease;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInMsg {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive design for mobile devices */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px 50px;
+                border-radius: 25px;
+            }
+
+            .heading {
+                font-size: 28px;
+            }
+
+            .romantic-intro {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .buttons {
+                gap: 15px;
+            }
+
+            .yes-btn {
+                padding: 14px 45px;
+                font-size: 18px;
+            }
+
+            .no-btn {
+                padding: 14px 45px;
+                font-size: 18px;
+            }
+
+            .profile-wrapper {
+                width: 160px;
+                height: 160px;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .orbit-heart {
+                font-size: 20px;
+            }
+
+            @keyframes orbit {
+                0% { 
+                    transform: translate(-50%, -50%) rotate(0deg) translateX(75px) rotate(0deg); 
+                }
+                100% { 
+                    transform: translate(-50%, -50%) rotate(360deg) translateX(75px) rotate(-360deg); 
+                }
+            }
+
+            .floating-bg-heart {
+                font-size: 30px;
+            }
+        }
+
+        /* iPhone specific optimizations */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                min-height: -webkit-fill-available;
+            }
         }
 
         .romantic-message {
@@ -274,21 +415,28 @@
     <div class="sparkle" style="bottom: 20%; right: 30%; animation-delay: 1.5s;"></div>
 
     <div class="container">
-        <!-- Profile Image from image folder -->
-        <div class="profile-image">
-            <img src="https://raw.githubusercontent.com/DesiLadkaa/Valentine_Day/main/images/IMG_20260205_204806.jpg" alt="My Love" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ff85b3%22/%3E%3Ctext x=%2250%22 y=%2255%22 font-size=%2230%22 text-anchor=%22middle%22 fill=%22white%22%3E💕%3C/text%3E%3C/svg%3E'">
+        <!-- Profile Image wrapper with orbiting hearts -->
+        <div class="profile-wrapper">
+            <div class="profile-image">
+                <img src="https://raw.githubusercontent.com/DesiLadkaa/Valentine_Day/main/images/IMG_20260205_204806.jpg" alt="My Love" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ff85b3%22/%3E%3Ctext x=%2250%22 y=%2255%22 font-size=%2230%22 text-anchor=%22middle%22 fill=%22white%22%3E💕%3C/text%3E%3C/svg%3E'">
+            </div>
+            <!-- Orbiting hearts around profile -->
+            <div class="orbit-heart">💕</div>
+            <div class="orbit-heart">💖</div>
+            <div class="orbit-heart">💗</div>
+            <div class="orbit-heart">💝</div>
         </div>
 
-        <div class="heading">Hey My Love 💕</div>
+        <div class="heading">Hey My Love 💞</div>
         
         <p class="romantic-intro">
             Every smile of yours feels like home. Every moment with you feels like magic. And today... I just have one important question.
         </p>
 
-        <h1>Will you be my Valentine? 💕</h1>
+        <h1>Will you be my Valentine? 💘</h1>
         
         <div class="buttons">
-            <button class="yes-btn" onclick="handleYes()">Yes 💕</button>
+            <button class="yes-btn" onclick="handleYes()">Yes ❤️</button>
             <button class="no-btn" onclick="handleNo(this)">No 💔</button>
         </div>
         <div class="romantic-message" id="romanticMessage"></div>

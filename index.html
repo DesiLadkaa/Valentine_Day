@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will you be my Valentine? 💝</title>
+    <title>Will you be my Valentine? 💖</title>
     <style>
         * {
             margin: 0;
@@ -423,17 +423,18 @@
             <!-- Orbiting hearts around profile -->
             <div class="orbit-heart">💕</div>
             <div class="orbit-heart">💖</div>
+            <div class="orbit-heart">💞</div>
             <div class="orbit-heart">💗</div>
             <div class="orbit-heart">💝</div>
         </div>
 
-        <div class="heading">Hey My Love 💞</div>
+        <div class="heading">Hey My Love 💖</div>
         
         <p class="romantic-intro">
             Every smile of yours feels like home. Every moment with you feels like magic. And today... I just have one important question.
         </p>
 
-        <h1>Will you be my Valentine? 💘</h1>
+        <h1>Will you be my Valentine? ❤️‍🔥</h1>
         
         <div class="buttons">
             <button class="yes-btn" onclick="handleYes()">Yes ❤️</button>
@@ -541,7 +542,7 @@
         function createFloatingHeart() {
             const heart = document.createElement('div');
             heart.className = 'floating-heart';
-            heart.textContent = ['❤️', '💕', '💖', '💗', '💝', '💞'][Math.floor(Math.random() * 6)];
+            heart.textContent = ['❤️', '💕', '💖', '🤗', '💗', '💝', '💞'][Math.floor(Math.random() * 6)];
             heart.style.left = Math.random() * 100 + '%';
             heart.style.fontSize = (Math.random() * 30 + 30) + 'px';
             heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
